@@ -1,0 +1,44 @@
+This is a write up for the beginner track box called Jerry
+
+The IP address for the box is 10.10.10.95 and
+myIP is 10.10.14.42
+
+nmap -sS -A -sV 10.10.10.95                                          
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-08-31 14:15 SAST
+Nmap scan report for 10.10.10.95
+Host is up (0.15s latency).
+Not shown: 999 filtered ports
+PORT     STATE SERVICE VERSION
+8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+|_http-favicon: Apache Tomcat
+|_http-server-header: Apache-Coyote/1.1
+|_http-title: Apache Tomcat/7.0.88
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Microsoft Windows Server 2012 or Windows Server 2012 R2 (91%), Microsoft Windows Server 2012 R2 (91%), Microsoft Windows Server 2012 (90%), Microsoft Windows 7 Professional (87%), Microsoft Windows 8.1 Update 1 (86%), Microsoft Windows Phone 7.5 or 8.0 (86%), Microsoft Windows 7 or Windows Server 2008 R2 (85%), Microsoft Windows Server 2008 R2 (85%), Microsoft Windows Server 2008 R2 or Windows 8.1 (85%), Microsoft Windows Server 2008 R2 SP1 or Windows 8 (85%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+TRACEROUTE (using port 8080/tcp)
+HOP RTT       ADDRESS
+1   149.19 ms 10.10.14.1
+2   151.26 ms 10.10.10.95
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 31.67 seconds
+
+===================================
+
+We have Tomcat running on port 8080 and that is the only port that nmap found. I'm running a full port scan on nmap using -p- just in case I missed something but for now I'm going to search exploitdb and see if we can attack this with an exploit or metasploit.
+
+The full port scan did not pick up anythin extra. So we will be attacking through 8080.
+
+Found a successful login with tomcat:s3cret
+
+Using the multi/http/tomcat_mgr_upload I was able to get a meterpreter shell onto the system. Now to find the user and root flag.
+
+The flags were both in the same textfile on the administrator desktop
+
+This was a really easy box if you know how to use metasploit. I think it's a really good box to have on the beginner track.
+
+Regards
+Fluffiest Bunny
